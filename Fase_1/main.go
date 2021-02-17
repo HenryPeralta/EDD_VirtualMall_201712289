@@ -1,12 +1,12 @@
 package main
 
-import(
+import (
+	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
+	"io/ioutil"
 	"log"
 	"net/http"
-	"encoding/json"
-	"io/ioutil"
+	"github.com/gorilla/mux"
 )
 
 type Tienda struct{
@@ -33,7 +33,10 @@ type Sobre struct{
 var re Sobre
 
 func main(){
+	fmt.Println("hola")
 	request()
+	fmt.Println(re.Datos[0].Indice)
+	fmt.Println("hola")
 }
 
 func servidor(w http.ResponseWriter, r *http.Request){
@@ -51,6 +54,22 @@ func metodoPost(w http.ResponseWriter, r *http.Request){
 	json.Unmarshal(body, &re)
 	fmt.Println(re)
 	fmt.Fprint(w, re)
+	fmt.Println(len(re.Datos))
+	fmt.Println(re.Datos[1].Indice)
+	fmt.Println(re.Datos[0].Departamentos)
+	fmt.Println(re.Datos[0].Departamentos[0].Tiendas)
+	fmt.Println(re.Datos[0].Departamentos[0].Tiendas[0].Calificacion)
+	fmt.Println(len(re.Datos[1].Departamentos))
+	//var i int
+	//fmt.Println(i)
+	//var j int = 6 
+	//var a [16]int
+	//fmt.Println(a)
+	i := len(re.Datos) * len(re.Datos[0].Departamentos) * 5
+	fmt.Println(i)
+	//fmt.Println(j)
+	arreglo := make([]int, i)
+	fmt.Println(arreglo)
 }
 
 func request(){
@@ -58,7 +77,12 @@ func request(){
 	router.HandleFunc("/", servidor)
 	router.HandleFunc("/getArreglo", getArreglo).Methods("GET")
 	router.HandleFunc("/getArreglo", metodoPost).Methods("POST")
+	//router.HandleFunc("/mostrar", mostrar)
 	log.Println("Escuchando en http://localhost:3000")
-	log.Fatal(http.ListenAndServe(":3000", router))
+	http.ListenAndServe(":3000", router)
 }
+
+/*func mostrar(w http.ResponseWriter, r *http.Request){
+	fmt.Println(re.Datos)
+}*/
 
