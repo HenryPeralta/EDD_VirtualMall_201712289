@@ -1,0 +1,109 @@
+body{
+    font-family: Georgia, times, serif;
+    color: #333;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    margin: 0;
+}
+
+h1{
+    font-size: 2;
+    line-height: 1.3em;
+}
+
+p{
+    margin-bottom: 1.6em;
+}
+
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.contenedor{
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+}
+
+.header{
+    background: #333;
+    color: white;
+    padding: 0.5rem 0;
+    /*position: fixed;*/
+    left: 0;
+    top: 0;
+    right: 0;
+}
+
+.header a{
+    color: white;
+    text-decoration: none;
+}
+
+.logo-nav-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navegation ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navegation ul .item{
+    display: inline-block;
+}
+
+.navegation ul .item a{
+    display: block;
+    padding: 0.5rem 1rem;
+    transition: all 0.4s linear;
+}
+
+.navegation ul .item a:hover{
+    background: #4a4a4a;
+}
+
+.navegation .despliege{
+    display: none;
+}
+
+.navegation ul .item:hover .despliege{
+    display: block;
+    position: fixed;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    background: #333;
+    z-index: 1;
+}
+.nombre{
+    font-size: 1.3em;
+}
+
+.main{
+    padding-top: 2rem;
+}
+
+.salida_json{
+    padding: 20px 0px 20px 10px;
+    width: 750px;
+    resize: none;
+}
+
+.btnp{
+    display: block;
+    position: fixed;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    background: #333;
+    color: white;
+    z-index: 1;
+}

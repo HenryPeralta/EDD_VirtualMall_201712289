@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <title>Fase 2</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container logo-nav-container">
+            <nav class="navegation">
+                <ul>
+                    <li class="item"><a>Menu</a>
+                        <ul class="despliege">
+                            <li>
+                                <form action="">
+                                    <input id="fileInput" title="Abrir" type="file" size="50" onchange="AbrirArchivo(this.files)" class="btnp">
+                                    <a onclick="document.getElementById('fileInput').click()">abrir</a>
+                                </form>
+                            </li>
+                            <li><a href="javascript:DescargarArchivo();">Guardar</a></li>
+                            <li><a>Guardar Como</a></li>
+                        </ul>
+                    </li>
+                    <li class="item"><a>Descargar</a>
+                        <ul class="despliege">
+                            <li><a>Ambos</a></li>
+                            <li><a href="javascript:mandartextojison();">JavaScript</a></li>
+                            <li><a href="javascript:obtenerTexto();">Python</a></li>
+                        </ul>
+                    </li>
+                    <li class="item"><a href="javascript:agregar();">Agregar Pestaña</a></li>
+                    <li class="item"><a href="index.html">Inicio</a></li>
+                    <li class="item"><a href="cargar_tienda.html">Cargar Tiendas</a></li>
+                    <li class="item"><a>Reportes py</q></a>
+                        <ul class="despliege">
+                            <li><a href="reporte_tokens.html" target="blank">Reporte de Tokens</a></li>
+                            <li><a href="reporte_errores.html" target="blank">Reporte de Errores</a></li>
+                            <li><a href="javascript:DescargarArchivoPython()">Traduccion py</a></li>
+                        </ul>
+                    </li>
+                    <li class="item"><a>Reportes js</q></a>
+                        <ul class="despliege">
+                            <li><a href="reportejs_tokens.html" target="blank">Reporte de Tokens</a></li>
+                            <li><a href="reporte_erroresjs.html" target="blank">Reporte de Errores</a></li>
+                            <li><a href="javascript:DescargarArchivojavaSC()">Traduccion js</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <p class="nombre">Henry Peralta 201712289</p>
+        </div>
+    </header>
+    <main class="main"></main>
+</body>
+</html>

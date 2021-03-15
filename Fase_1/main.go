@@ -259,12 +259,12 @@ func creandoGrafico() {
 		fmt.Println("Archivo creado")
 	}
 
-	err = os.Remove("./Grafico/Matriz.png")
+	err = os.Remove("./Grafico/Matriz.pdf")
 	if err != nil {
 		fmt.Println("Error al eliminar el .png")
 	}
 
-	out, err := exec.Command("dot", "-Tpng", "./Grafico/Matriz.dot", "-o", "./Grafico/Matriz.png").Output()
+	out, err := exec.Command("dot", "-Tpdf", "./Grafico/Matriz.dot", "-o", "./Grafico/Matriz.pdf").Output()
 	if err != nil {
 		fmt.Println("No pude ejecutar el comando")
 	}
