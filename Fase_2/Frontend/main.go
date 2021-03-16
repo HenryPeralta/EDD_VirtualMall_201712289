@@ -14,14 +14,6 @@ import(
 	//"strconv"
 )
 
-/*type json_file struct {
-	Name    string `json:"Name"`
-	Content string `json:"Content"`
-	Type    string `json:"Type"`
-	Respuesta[]string `json:"Respuesta"`
-	Traduccion string `json:"Traduccion"`
-}*/
-
 type json_file struct {
 	Datos []struct {
 		Indice        string `json:"Indice"`
