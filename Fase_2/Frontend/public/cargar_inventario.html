@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="index.css"/>
     <script type="text/javascript" src="./jquery-1.7.2.min.js"></script>
-    <title>Tiendas</title>
+    <title>Cargar Inventario</title>
 </head>
 <body>
     <header class="header">
@@ -60,10 +60,14 @@
     </header>
     <main class="main"></main>
     <div class="contenedor">
-        <h1><center>Tiendas</center></h1>
-        <div id="tienda">
-        </div>
+        Cargar Inventario
+        <br>
+        <textarea id="consola_json" class="salida_json" rows="18"></textarea>
+        <br>
+        <form action="">
+            <input type="button" value="Cargar" class="btnp" onclick="javascript:obtener_json();">
+        </form>
     </div>
-    <script type="text/javascript" src="tiendas.js"></script>
+    <script type="text/javascript" src="cargar_inventario.js"></script>
 </body>
 </html>
