@@ -23,11 +23,27 @@ p{
     grid-template-columns: repeat(2, 1fr);
 }
 
+.capsula{
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
 .contenedor{
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
+}
+
+.contenedor1{
+    background: white;
+}
+
+.contenedor2{
+    background: white;
 }
 
 .header{
@@ -100,10 +116,15 @@ p{
 
 .btnp{
     display: block;
-    position: fixed;
     margin: 0;
     padding: 0.5rem 1rem;
-    background: #333;
+    background:#333;
     color: white;
     z-index: 1;
+}
+
+.agregando_product{
+    padding: 20px 0px 20px 10px;
+    width: 550px;
+    resize: none;
 }

@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="index.css"/>
     <script type="text/javascript" src="./jquery-1.7.2.min.js"></script>
-    <title>Tiendas</title>
+    <title>Cargar Tiendas</title>
 </head>
 <body>
     <header class="header">
@@ -59,17 +59,21 @@
         </div>
     </header>
     <main class="main"></main>
-    <script type="text/javascript" src="tiendas.js"></script>
-    <div class="contenedor">
-        <h1><center>Tiendas</center></h1>
-        <div id="tienda">
-        </div>
-        <form><center>
-            <input type="number" id="tiendaid" placeholder="No. tienda" />
-            <input type="button" onClick="cargar()" value="Ingresar" />
-        </center>
+    <div class="capsula">
+        <div class="contenedor1">
+        Ingresar Productos
         <br>
+        <textarea id="agregando_product" class="agregando_product" rows="18"></textarea>
+        <br>
+        <form action="">
+            <input type="button" value="Cargar" class="btnp">
         </form>
+        </div>
+        <div class = "contenedor2">
+            <div id="tiendas">                
+            </div>
+        </div>
     </div>
+    <script type="text/javascript" src="inventario_tiendas.js"></script>
 </body>
 </html>

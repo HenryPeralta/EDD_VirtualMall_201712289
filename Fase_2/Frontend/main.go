@@ -9,6 +9,7 @@ import(
 	//"fmt"
 	"io/ioutil"
 	"./avl"
+	"./lista"
 	//"reflect"
 	//"os"
 	//"os/exec"
@@ -49,9 +50,50 @@ type json_inventario struct {
 	} `json:"Invetarios"`
 }
 
+type json_prueba struct {
+	Datos []struct {
+		Indice        string `json:"Indice"`
+		Departamentos []struct {
+			Nombre  string `json:"Nombre"`
+			Tiendas []struct {
+				Nombre       string `json:"Nombre"`
+				Descripcion  string `json:"Descripcion"`
+				Contacto     string `json:"Contacto"`
+				Calificacion int    `json:"Calificacion"`
+				Logo         string `json:"Logo"`
+			} `json:"Tiendas"`
+		} `json:"Departamentos"`
+	} `json:"Datos"`
+}
+
 var dato_json json_file
 var dato_inventario json_inventario
+var dato_prueba json_prueba
 var Invent = avl.NewAVL()
+var Tienda_list = lista.NewLista()
+
+func lista_tiendas(){
+	for i:=0; i < len(dato_json.Datos); i++{
+		var departamentos = dato_json.Datos[i].Departamentos
+		//fmt.Println(departamentos)
+		for j:=0; j < len(departamentos); j++{
+			var tiendas = departamentos[j].Tiendas
+			//fmt.Println(tiendas)
+			for k:=0; k < len(tiendas); k++{
+				var tienda = tiendas[k]
+				//fmt.Println(tienda)
+				nuevaTienda := lista.Tienda{
+					Nombre:       tienda.Nombre,
+					Descripcion:  tienda.Descripcion,
+					Contacto:     tienda.Contacto,
+					Calificacion: tienda.Calificacion,
+					Logo:         tienda.Logo,
+				}
+				Tienda_list.Insertar(nuevaTienda)
+			}
+		}
+	}
+}
 
 func avl_inventario(){
 	for i:=0; i < len(dato_inventario.Invetarios); i++ {
@@ -81,6 +123,8 @@ func getTiendas(w http.ResponseWriter, r *http.Request) {
 func createTiendas(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &dato_json)
+	lista_tiendas()
+	Tienda_list.Imprimir()
 }
 
 func getInventarios(w http.ResponseWriter, r *http.Request) {
@@ -95,12 +139,24 @@ func createInventarios(w http.ResponseWriter, r *http.Request) {
 	Invent.Print()
 }
 
+func getCargaProduct(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(dato_prueba)
+}
+
+func createCargaProduct(w http.ResponseWriter, r *http.Request) {
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &dato_prueba)
+}
+
 func main() {
 	router := mux.NewRouter().StrictSlash(false)
 	router.HandleFunc("/Tiendas", getTiendas).Methods("GET")
 	router.HandleFunc("/Tiendas", createTiendas).Methods("POST")
 	router.HandleFunc("/Inventarios", getInventarios).Methods("GET")
 	router.HandleFunc("/Inventarios", createInventarios).Methods("POST")
+	router.HandleFunc("/cargaproduct", getCargaProduct).Methods("GET")
+	router.HandleFunc("/cargaproduct", createCargaProduct).Methods("POST")
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./public")))
 	log.Println("Escuchando en http://localhost:3000")
 	http.ListenAndServe(":3000", router)
