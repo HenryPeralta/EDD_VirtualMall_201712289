@@ -10,6 +10,7 @@ import(
 	"io/ioutil"
 	"./avl"
 	"./lista"
+	"bytes"
 	//"reflect"
 	//"os"
 	//"os/exec"
@@ -66,9 +67,46 @@ type json_prueba struct {
 	} `json:"Datos"`
 }
 
+//json de Inventarios2
+type json_inventario2 struct {
+	Invetarios []struct {
+		Tienda       string `json:"Tienda"`
+		Departamento string `json:"Departamento"`
+		Calificacion int    `json:"Calificacion"`
+		Productos    []struct {
+			Nombre      string  `json:"Nombre"`
+			Codigo      int     `json:"Codigo"`
+			Descripcion string  `json:"Descripcion"`
+			Precio      float64 `json:"Precio"`
+			Cantidad    int     `json:"Cantidad"`
+			Imagen      string  `json:"Imagen"`
+		} `json:"Productos"`
+	} `json:"Invetarios"`
+}
+
+type json_producto struct{
+	Productos    []struct {
+		Nombre      string  `json:"Nombre"`
+		Codigo      int     `json:"Codigo"`
+		Descripcion string  `json:"Descripcion"`
+		Precio      float64 `json:"Precio"`
+		Cantidad    int     `json:"Cantidad"`
+		Imagen      string  `json:"Imagen"`
+	} `json:"Productos"`
+}
+
+type borrar struct {
+	Invetarios []struct {
+		Tienda       string `json:"Tienda"`
+	} `json:"Invetarios"`
+}
+
 var dato_json json_file
 var dato_inventario json_inventario
 var dato_prueba json_prueba
+var dato_inventario2 json_inventario2
+var dato_producto json_producto
+var dato_borrar borrar
 var Invent = avl.NewAVL()
 var Tienda_list = lista.NewLista()
 
@@ -137,6 +175,24 @@ func createInventarios(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(body, &dato_inventario)
 	avl_inventario()
 	Invent.Print()
+
+	//Mandando y regresando inventario
+
+	jsonReq, err := json.Marshal(dato_inventario)
+	req, err := http.Post("http://localhost:3000/Inventarios2", "application/json; charset = utf-8", bytes.NewBuffer(jsonReq))
+	
+	if err != nil {
+	}
+
+	defer req.Body.Close()
+	bodyBytes, _ := ioutil.ReadAll(req.Body)
+	json.Unmarshal(bodyBytes, &dato_inventario)
+	//fmt.Println(string(bodyBytes))
+	//fmt.Fprintf(w, string(bodyBytes))
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(dato_inventario)
 }
 
 func getCargaProduct(w http.ResponseWriter, r *http.Request) {
@@ -149,6 +205,36 @@ func createCargaProduct(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(body, &dato_prueba)
 }
 
+func getInventario2(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(dato_inventario2)
+}
+
+func createInventario2(w http.ResponseWriter, r *http.Request) {
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &dato_inventario2)
+}
+
+func getProducto(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(dato_producto)
+}
+
+func createProducto(w http.ResponseWriter, r *http.Request) {
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &dato_producto)
+}
+
+func getBorrar(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(dato_borrar)
+}
+
+func createBorrar(w http.ResponseWriter, r *http.Request) {
+	body, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(body, &dato_borrar)
+}
+
 func main() {
 	router := mux.NewRouter().StrictSlash(false)
 	router.HandleFunc("/Tiendas", getTiendas).Methods("GET")
@@ -157,6 +243,12 @@ func main() {
 	router.HandleFunc("/Inventarios", createInventarios).Methods("POST")
 	router.HandleFunc("/cargaproduct", getCargaProduct).Methods("GET")
 	router.HandleFunc("/cargaproduct", createCargaProduct).Methods("POST")
+	router.HandleFunc("/Inventarios2", getInventario2).Methods("GET")
+	router.HandleFunc("/Inventarios2", createInventario2).Methods("POST")
+	router.HandleFunc("/producto", getProducto).Methods("GET")
+	router.HandleFunc("/producto", createProducto).Methods("POST")
+	router.HandleFunc("/Borrar", getBorrar).Methods("GET")
+	router.HandleFunc("/Borrar", createBorrar).Methods("POST")
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./public")))
 	log.Println("Escuchando en http://localhost:3000")
 	http.ListenAndServe(":3000", router)

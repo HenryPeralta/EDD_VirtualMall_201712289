@@ -11,26 +11,6 @@
         <div class="container logo-nav-container">
             <nav class="navegation">
                 <ul>
-                    <li class="item"><a>Menu</a>
-                        <ul class="despliege">
-                            <li>
-                                <form action="">
-                                    <input id="fileInput" title="Abrir" type="file" size="50" onchange="AbrirArchivo(this.files)" class="btnp">
-                                    <a onclick="document.getElementById('fileInput').click()">abrir</a>
-                                </form>
-                            </li>
-                            <li><a href="javascript:DescargarArchivo();">Guardar</a></li>
-                            <li><a>Guardar Como</a></li>
-                        </ul>
-                    </li>
-                    <li class="item"><a>Descargar</a>
-                        <ul class="despliege">
-                            <li><a>Ambos</a></li>
-                            <li><a href="javascript:mandartextojison();">JavaScript</a></li>
-                            <li><a href="javascript:obtenerTexto();">Python</a></li>
-                        </ul>
-                    </li>
-                    <li class="item"><a href="javascript:agregar();">Agregar Pestaña</a></li>
                     <li class="item"><a href="index.html">Inicio</a></li>
                     <li class="item"><a>Cargas</q></a>
                         <ul class="despliege">
@@ -39,20 +19,6 @@
                         </ul>
                     </li>
                     <li class="item"><a href="tiendas.html">Tiendas</a></li>
-                    <li class="item"><a>Reportes py</q></a>
-                        <ul class="despliege">
-                            <li><a href="reporte_tokens.html" target="blank">Reporte de Tokens</a></li>
-                            <li><a href="reporte_errores.html" target="blank">Reporte de Errores</a></li>
-                            <li><a href="javascript:DescargarArchivoPython()">Traduccion py</a></li>
-                        </ul>
-                    </li>
-                    <li class="item"><a>Reportes js</q></a>
-                        <ul class="despliege">
-                            <li><a href="reportejs_tokens.html" target="blank">Reporte de Tokens</a></li>
-                            <li><a href="reporte_erroresjs.html" target="blank">Reporte de Errores</a></li>
-                            <li><a href="javascript:DescargarArchivojavaSC()">Traduccion js</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </nav>
             <p class="nombre">Henry Peralta 201712289</p>
@@ -66,7 +32,7 @@
         <textarea id="agregando_product" class="agregando_product" rows="18"></textarea>
         <br>
         <form action="">
-            <input type="button" value="Cargar" class="btnp">
+            <input type="button" value="Cargar" class="btnp" onclick="javascript:mandar_producto();">
         </form>
         </div>
         <div class = "contenedor2">
